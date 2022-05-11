@@ -1,8 +1,11 @@
-import React from 'react'
+import React,{useState} from 'react'
 import { NavLink } from 'react-router-dom';
+import {Button } from '@mui/material'
 import DATA from '../Data'
 
 const Product = () => {
+  const [data,setData] = useState(DATA)
+  
 
     const cardItem=(item)=>{
       return(
@@ -17,6 +20,20 @@ const Product = () => {
       );
     }
 
+  
+    
+    const sortBylow =(item) => {
+      if(item==="l"){
+       let res = DATA.sort((a,b) => a.price - b.price)
+       setData([...res])
+       console.log(res)
+      }else if( item==="h"){
+        let res = DATA.sort((a,b) => b.price - a.price)
+        setData([...res])
+        //console.log(res)
+      }
+      
+      }
 
 
   return (
@@ -26,6 +43,13 @@ const Product = () => {
           <div className="col-12 text-center">
             <h1>Product</h1>
             <hr />
+            <div className="btn1">
+              <Button className="mt-8 w-32 " onClick={() => { sortBylow("l") }}>Less price</Button>
+            </div>
+            <div className="btn1">
+              <Button className="mt-8 w-32  " onClick={() => { sortBylow("h") }}>high price</Button>
+            </div>
+            <div className="mt-5"></div>
           </div>
         </div>
       </div>
