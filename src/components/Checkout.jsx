@@ -9,14 +9,16 @@ const Checkout = () => {
   const history = useNavigate("")
 
   var total=0
+
   const itemList=(item)=>{
-      total=total+item.price;
+      total=total+item.qty*item.price;
       return(
         <li className="list-group-item d-flex justify-content-between lh-sm">
         <div>
             <h6 className="my-0">{item.title}</h6>
         </div>
-        <span className="text-muted">₹{item.price}</span>
+        <span className="text-muted"> {item.qty} X ₹{item.price}=₹
+                                  {item.qty * item.price}</span>
     </li>
       )
   }

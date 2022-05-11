@@ -2,6 +2,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
 import { delItem } from '../redux/actions/index'
+import { addItem } from '../redux/actions/index'
 import { NavLink } from 'react-router-dom'
 
 
@@ -13,6 +14,11 @@ const Cart = () => {
     const handleClose=(item)=>{
         dispatch(delItem(item))
     }
+
+    const handleButton=(item)=>{
+        dispatch(addItem(item))
+    }
+    
 
     const cartItems=(cartItem)=>{
         return(
@@ -26,7 +32,13 @@ const Cart = () => {
                             </div>
                             <div className="col-md-4">
                               <h3>{cartItem.title}</h3>
-                              <p className='lead fw-bold'>₹{cartItem.price}</p>
+
+                              <p className='lead fw-bold'>
+                                  {cartItem.qty} X ₹{cartItem.price}=₹
+                                  {cartItem.qty * cartItem.price}
+                                  </p>
+                                  <button onClick={()=>handleClose(cartItem)}className='btn btn-outline-dark me-4'><i className='fa fa-minus'></i></button>
+                                  <button onClick={()=>handleButton(cartItem)}className='btn btn-outline-dark'><i className='fa fa-plus'></i></button>
                             </div>
                         </div>
                 </div>
