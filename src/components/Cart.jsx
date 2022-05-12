@@ -27,7 +27,7 @@ const Cart = () => {
                     <button onClick={()=>handleClose(cartItem)} className="btn-close float-end" aria-label='Close'></button>
                         <div className="row justify-content-Center">
                             <div className="col-md-4">
-                                <img src={cartItem.img} alt={cartItem.title} height="200px"
+                                <img src={cartItem.image} alt={cartItem.title} height="200px"
                                 width="180px"/>
                             </div>
                             <div className="col-md-4">

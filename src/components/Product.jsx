@@ -1,97 +1,97 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
+import Skeleton from 'react-loading-skeleton'
 import { NavLink } from 'react-router-dom';
-import {Button } from '@mui/material'
-import DATA from '../Data'
-
 
 const Product = () => {
-  const [data,setData] = useState(DATA)
-  
+  const [data,setData]=useState([])
+  const [filter, setFilter]=useState(data)
+  const [loading, setLoding]=useState(false)
+  let componentMonuted=true;
 
-    const cardItem=(item)=>{
-      return(
-        <div className="card my-5 py-4" key={item.id} style={{width: "18rem"}}>
-          <img src={item.img} className="card-img-top" alt={item.title} />
-            <div className="card-body text-center">
-              <h5 className="card-title">{item.title}</h5>
-             <p className="lead">₹{item.price}</p>
-              <NavLink to={`/products/${item.id}`} className="btn btn-outline-primary">Buy Now</NavLink>
-            </div>
-        </div>
-      );
+  useEffect(()=>{
+    const getProducts=async()=>{
+      setLoding(true);
+      const response=await fetch("http://localhost:8005/product");
+      if(componentMonuted){
+        setData(await response.clone().json());
+        setFilter(await response.json());
+        setLoding(false)
+      }
+      return () =>{
+        componentMonuted=false;
+      }
+      
     }
+    getProducts()
+  },[])
 
+ const Loading=()=>{
+   return(
+     <>
+       <div className="col-md-3">
+         <Skeleton height={350}/>
+       </div>
+       <div className="col-md-3">
+         <Skeleton height={350}/>
+       </div>
+       <div className="col-md-3">
+         <Skeleton height={350}/>
+       </div>
+       <div className="col-md-3">
+         <Skeleton height={350}/>
+       </div>
+     </>
+   )
+ }
+
+ const filterProduct = (cat)=>{
+   const updatedList= data.filter((x)=>x.category === cat);
+   setFilter(updatedList);
+ }
+
+ const ShowProducts=()=>{
+   return(
+     <><div className="buttons d-flex justify-content-center mb-5 pb-5">
+     <button className="btn btn-outline-dark me-2" onClick={()=>setFilter(data)}>All</button>
+     <button className="btn btn-outline-dark me-2" onClick={()=>filterProduct("men's clothing")}>Men's Clothing</button>
+     <button className="btn btn-outline-dark me-2" onClick={()=>filterProduct("women's clothing")}>Women's Clothing</button>
+     <button className="btn btn-outline-dark me-2" onClick={()=>filterProduct("jewelery")}>jewelery</button>
+     <button className="btn btn-outline-dark me-2"onClick={()=>filterProduct("electronics")}>Electronic</button>
+   </div>
+   {filter.map((product)=>{
+     return(
+       <>
+       <div className="col-md-3 mb-4">
+           <div className="card h-100 text-center p-4" key={product.id}>
+             <img src={product.image} className="card-img-top" alt={product.title} height="250px" />
+               <div className="card-body">
+                 <h5 className="card-title mb-0">{product.title.substring(0,
+                  12)}...</h5>
+                 <p className="card-text lead fw-bold">₹{product.price}</p>
+                 <NavLink to={`/product/${product.id}`} className="btn btn-outline-primary">Buy Now</NavLink>
+               </div>
+</div>
+       </div>
+       </>
+     )
+   })}
+   </>
   
-    
-    const sortBylow =(item) => {
-      if(item==="l"){
-       let res = DATA.sort((a,b) => a.price - b.price)
-       setData([...res])
-       console.log(res)
-      }else if( item==="h"){
-        let res = DATA.sort((a,b) => b.price - a.price)
-        setData([...res])
-        //console.log(res)
-      }
-      
-      }
+   )
 
-      const sortbyproduct=(item)=>{
-        if(item==="man"){
-          let rea=DATA.filter((a)=>a.category)
-          setData([...rea])
-          console.log(rea)
-        }else if(item==="Kitchen"){
-          let rea=DATA.filter((a)=>a.categor)
-          setData([...rea])
-        }else if(item==="electronics"){
-          let rea=DATA.filter((a)=>a.catego)
-          setData([...rea])
-        }
-        else if(item==="mobile"){
-          let rea=DATA.filter((a)=>a.categ)
-          setData([...rea])
-        }
-      }
-      
-
+ }
 
   return (
     <div>
-      <div className="container py-5">
+      <div className="container">
         <div className="row">
-          <div className="col-12 text-center">
-            <h1>Product</h1>
+          <div className="col-12">
+            <h1>Latest Product</h1>
             <hr />
-            <div className="row justify-content-around">
-              <div className="btn1 d-flex justify-content-center">
-                <Button className="mt-8 w-32 " onClick={() => { sortBylow("l") }}>Less price</Button>
-              </div>
-              <div className="btn1 d-flex justify-content-center">
-                <Button className="mt-8 w-32  " onClick={() => { sortBylow("h") }}>high price</Button>
-              </div>
-            </div>
-            <div className="row justify-content-around">
-              <div className="btn1 d-flex justify-content-center">
-                <NavLink to={`/Man`}><Button className="mt-8 w-32 " onClick={() => { sortbyproduct("man") }}>man</Button></NavLink>
-              </div>
-              <div className="btn1 d-flex justify-content-center">
-                <NavLink to={`/Mobile`}><Button className="mt-8 w-32" onClick={() => { sortbyproduct("mobile") }}>mobile</Button></NavLink>
-              </div>
-              <div className="btn1 d-flex justify-content-center">
-                <NavLink to={`/ele`}><Button className="mt-8 w-32 " onClick={() => { sortbyproduct("electronics") }}>electronics</Button></NavLink>
-              </div>
-              <div className="btn1 d-flex justify-content-center">
-                <NavLink to={`/Kichen`}><Button className="mt-8 w-32  " onClick={() => { sortbyproduct("Kitchen") }}>Kitchen</Button></NavLink>
-              </div>
-            </div>
-            <div className="mt-5"></div>
           </div>
         </div>
-      </div>
-      <div className="container">
-        <div className="row justify-content-around">
-          {DATA.map(cardItem)}
+        <div className='row justify-content-center'>
+          {loading ? <Loading/> : <ShowProducts/>}
         </div>
       </div>
     </div>
