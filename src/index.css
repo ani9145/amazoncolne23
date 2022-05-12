@@ -49,3 +49,12 @@ code {
   margin-top: 1%;
 
 }
+
+.form{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: left;
+  width: 400px;
+  margin:auto;
+}

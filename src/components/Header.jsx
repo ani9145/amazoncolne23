@@ -1,7 +1,6 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
-import Login from './buttons/Login'
-import Signup from './buttons/Signup'
+
 import CartBtn from './buttons/CartBtn'
 
 const Header = () => {
@@ -28,8 +27,8 @@ const Header = () => {
           <NavLink className="nav-link" to="/contact">Contact</NavLink>
         </li>
       </ul>
-      <Login />
-    <Signup />
+      <NavLink className="nav-link" to="/signup">Register</NavLink>
+      <NavLink className="nav-link" to="/login">Login</NavLink>
     <CartBtn />
     </div>
   </div>
