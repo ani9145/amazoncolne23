@@ -58,7 +58,7 @@ const Checkout = () => {
                       <div className="row g-3">
                           <div className="col-sm-6">
                               <label htmlFor="firstName" className="form-label">First name</label>
-                              <input type="text" className="form-control" id="firstName" placeholder="" value="" required="" />
+                              <input type="text" className="form-control" id="firstName" placeholder="firstName" value="" required="" />
                               <div className="invalid-feedback">
                                   Valid first name is required.
                               </div>
@@ -66,7 +66,7 @@ const Checkout = () => {
 
                           <div className="col-sm-6">
                               <label htmlFor="lastName" className="form-label">Last name</label>
-                              <input type="text" className="form-control" id="lastName" placeholder="" value="" required="" />
+                              <input type="text" className="form-control" id="lastName" placeholder="firstName" value="" required="" />
                               <div className="invalid-feedback">
                                   Valid last name is required.
                               </div>
@@ -108,7 +108,7 @@ const Checkout = () => {
                               <label htmlFor="country" className="form-label">Country</label>
                               <select className="form-select" id="country" required="">
                                   <option value="">Choose...</option>
-                                  <option>United States</option>
+                                  <option>India</option>
                               </select>
                               <div className="invalid-feedback">
                                   Please select a valid country.
@@ -119,7 +119,7 @@ const Checkout = () => {
                               <label htmlFor="state" className="form-label">State</label>
                               <select className="form-select" id="state" required="">
                                   <option value="">Choose...</option>
-                                  <option>California</option>
+                                  <option>Maharashtra</option>
                               </select>
                               <div className="invalid-feedback">
                                   Please provide a valid state.
