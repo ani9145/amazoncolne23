@@ -13,7 +13,7 @@ const ProductDetail = () => {
     useEffect(()=>{
       const getProduct=async()=>{
           setLoading(true)
-          const response=await fetch(`http://localhost:8005/product/${id}`);
+          const response=await fetch(`https://amazonbackend23.herokuapp.com/product/${id}`);
           setProduct(await response.json())
           setLoading(false)
       }
