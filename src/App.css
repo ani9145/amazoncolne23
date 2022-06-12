@@ -72,3 +72,13 @@ p{
   .forgot-password a {
     color: #167bff;
   }
+  .footer_container{
+    display: flex;
+    justify-content: center;
+    background-color: #232f3e;
+    color: white;
+  }
+  .footer_div{
+    margin-left: 50px;
+    font-family:'Times New Roman', Times, serif;
+  }
